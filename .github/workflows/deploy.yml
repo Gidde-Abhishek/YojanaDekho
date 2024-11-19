@@ -21,14 +21,7 @@ jobs:
         cache: 'npm'
         
     - name: Install dependencies
-      run: |
-        npm ci
-        npm install -D canvas    # Install canvas for tests
-        
-    - name: Create Test Setup
-      run: |
-        mkdir -p src/__mocks__
-        echo "const Lottie = () => null; export default Lottie;" > src/__mocks__/react-lottie.js
+      run: npm ci
         
     - name: Build
       run: npm run build
@@ -44,14 +37,6 @@ jobs:
         
     - name: Deploy to Server
       run: |
-        # Backup existing deployment
-        ssh -i ~/.ssh/deploy_key developer@13.234.33.4 "if [ -d /var/www/html/schemefinder.arthnirmiti.com ]; then tar -czf ~/backup-\$(date +%Y%m%d_%H%M%S).tar.gz -C /var/www/html schemefinder.arthnirmiti.com; fi"
-        
         # Deploy new version
         rsync -avz --delete -e "ssh -i ~/.ssh/deploy_key" \
           build/ developer@13.234.33.4:/var/www/html/schemefinder.arthnirmiti.com/
-
-    - name: Post-deployment tasks
-      run: |
-        # Clear browser caches by updating cache busting query parameter
-        ssh -i ~/.ssh/deploy_key developer@13.234.33.4 "cd /var/www/html/schemefinder.arthnirmiti.com && find . -type f -name '*.js' -o -name '*.css' | xargs -I {} sh -c 'mv {} {}.tmp && mv {}.tmp {}'"
