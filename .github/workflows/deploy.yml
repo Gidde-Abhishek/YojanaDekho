@@ -51,4 +51,4 @@ jobs:
     - name: Deploy to Server
       run: |
         rsync -avz --delete -e "ssh -i ~/.ssh/deploy_key" \
-          build/ developer@13.234.33.4:/var/www/html/schemefinder.arthnirmiti.com/
+          build/ developer@13.234.33.4:/var/www/html/schemefinder.arthnirmiti.com/ 
