@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Award, ChevronDown, ChevronUp, Search } from 'lucide-react';
-import Lottie from 'react-lottie';
+// import Lottie from 'react-lottie';
 // import animationData from './confetti-animation.json'; // You'll need to add this JSON file
 import loadingAnimation from './loading-animation.json'; // You'll need to add this JSON file
 import './SchemeResults.css';
@@ -186,7 +186,7 @@ const SchemeResults = () => {
   if (loading) {
     return (
       <div className="loading-container">
-        <Lottie options={loadingOptions} height={200} width={200} />
+        {/* <Lottie options={loadingOptions} height={200} width={200} /> */}
         <p>Finding your eligible schemes...</p>
       </div>
     );
