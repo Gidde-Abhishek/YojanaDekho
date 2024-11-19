@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Award, ChevronDown, ChevronUp, Search } from 'lucide-react';
 // import Lottie from 'react-lottie';
 // import animationData from './confetti-animation.json'; // You'll need to add this JSON file
-import loadingAnimation from './loading-animation.json'; // You'll need to add this JSON file
+// import loadingAnimation from './loading-animation.json'; // You'll need to add this JSON file
 import './SchemeResults.css';
 import { useLocation } from 'react-router-dom';
 
@@ -174,14 +174,14 @@ const SchemeResults = () => {
   //   }
   // };
 
-  const loadingOptions = {
-    loop: true,
-    autoplay: true,
-    animationData: loadingAnimation,
-    rendererSettings: {
-      preserveAspectRatio: 'xMidYMid slice'
-    }
-  };
+  // const loadingOptions = {
+  //   loop: true,
+  //   autoplay: true,
+  //   animationData: loadingAnimation,
+  //   rendererSettings: {
+  //     preserveAspectRatio: 'xMidYMid slice'
+  //   }
+  // };
 
   if (loading) {
     return (
