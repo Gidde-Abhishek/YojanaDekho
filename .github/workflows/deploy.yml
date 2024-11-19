@@ -21,12 +21,14 @@ jobs:
         cache: 'npm'
         
     - name: Install dependencies
-      run: npm ci
+      run: |
+        npm ci
+        npm install --save-dev @babel/plugin-proposal-private-property-in-object
         
     - name: Build
       run: npm run build
       env:
-        CI: false  # Prevents treating warnings as errors
+        CI: false
         
     - name: Setup SSH
       run: |
@@ -37,6 +39,5 @@ jobs:
         
     - name: Deploy to Server
       run: |
-        # Deploy new version
         rsync -avz --delete -e "ssh -i ~/.ssh/deploy_key" \
           build/ developer@13.234.33.4:/var/www/html/schemefinder.arthnirmiti.com/
