@@ -1,5 +1,51 @@
-# .github/workflows/deploy.yml
-name: Deploy React Frontend
+# # .github/workflows/deploy.yml
+# name: Deploy React Frontend
+
+# on:
+#   workflow_dispatch:  # Allows manual trigger
+#   push:
+#     branches: [ main ]
+#   pull_request:
+#     branches: [ main ]
+
+# jobs:
+#   deploy:
+#     runs-on: ubuntu-latest
+    
+#     steps:
+#     - uses: actions/checkout@v4
+    
+#     - name: Set up Node.js
+#       uses: actions/setup-node@v4
+#       with:
+#         node-version: '18'
+#         cache: 'npm'
+        
+#     - name: Install dependencies
+#       run: |
+#         npm ci
+#         npm install --save-dev @babel/plugin-proposal-private-property-in-object
+        
+#     - name: Build
+#       run: npm run build
+#       env:
+#         CI: false
+        
+#     - name: Setup SSH
+#       run: |
+#         mkdir -p ~/.ssh
+#         echo "${{ secrets.DEPLOY_KEY }}" > ~/.ssh/deploy_key
+#         chmod 600 ~/.ssh/deploy_key
+#         echo "13.234.33.4 ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQCroDMJBI8rj2Vpy70nF0lJTgXXeCwjU1f5QULyLboyPGS1DO0FYcuV27W7lLA7xNGwheIk+z8cPZ87u6nfTDM+H7HYDwqdGJfmM64qTZWAkAqWHS3wqMsuElgGwdiUxTwTcUa7klawHQCEMAoyMW6onWUDeA2rIsw60p3HwjCyjZXhbSMLo/Xgaz/Ss09YMSnAtn4ME8b2F38Is/KGo4xPzFZt6pIw7gMm7u9nW/drCVTXhVAtK64Mxw61GSYM20cdDVXSMQKIAzCvYem76w9/+a/uBFU4PRJ9SY/tm/VwDmmqyWC8cFUHJ65ZLvffasi8Yl+Y3gh4h8nMTpBnXFaiquDQBYs4IY+JgpnyXoTi4ZOofRL5CE2K1qz6zK9xyPnsJqPFJaYisASfmh9jcf384kZAN07PDD8wFIhCLFTyaTBei34qxxEstlZfbBSAiWtAExWVjfFZg6v0EPmAEoGSaO1/oC5I6cig9At8+fvv4hMitfeJ07fNt+ZidHkydyM=" >> ~/.ssh/known_hosts
+        
+#     - name: Deploy to Server
+#       run: |
+#         rsync -avz --delete -e "ssh -i ~/.ssh/deploy_key" \
+#           build/ developer@13.234.33.4:/var/www/html/schemefinder.arthnirmiti.com/
+
+# .github/workflows/build.yml
+# .github/workflows/build.yml
+name: Build React Frontend
 
 on:
   workflow_dispatch:  # Allows manual trigger
@@ -9,8 +55,8 @@ on:
     branches: [ main ]
 
 jobs:
-  deploy:
-    runs-on: ubuntu-latest
+  build:
+    runs-on: ubuntu-latest 
     
     steps:
     - uses: actions/checkout@v4
@@ -30,15 +76,12 @@ jobs:
       run: npm run build
       env:
         CI: false
+
+    - name: Create deployment archive
+      run: tar -czf build.tar.gz build/
         
-    - name: Setup SSH
-      run: |
-        mkdir -p ~/.ssh
-        echo "${{ secrets.DEPLOY_KEY }}" > ~/.ssh/deploy_key
-        chmod 600 ~/.ssh/deploy_key
-        echo "13.234.33.4 ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQCroDMJBI8rj2Vpy70nF0lJTgXXeCwjU1f5QULyLboyPGS1DO0FYcuV27W7lLA7xNGwheIk+z8cPZ87u6nfTDM+H7HYDwqdGJfmM64qTZWAkAqWHS3wqMsuElgGwdiUxTwTcUa7klawHQCEMAoyMW6onWUDeA2rIsw60p3HwjCyjZXhbSMLo/Xgaz/Ss09YMSnAtn4ME8b2F38Is/KGo4xPzFZt6pIw7gMm7u9nW/drCVTXhVAtK64Mxw61GSYM20cdDVXSMQKIAzCvYem76w9/+a/uBFU4PRJ9SY/tm/VwDmmqyWC8cFUHJ65ZLvffasi8Yl+Y3gh4h8nMTpBnXFaiquDQBYs4IY+JgpnyXoTi4ZOofRL5CE2K1qz6zK9xyPnsJqPFJaYisASfmh9jcf384kZAN07PDD8wFIhCLFTyaTBei34qxxEstlZfbBSAiWtAExWVjfFZg6v0EPmAEoGSaO1/oC5I6cig9At8+fvv4hMitfeJ07fNt+ZidHkydyM=" >> ~/.ssh/known_hosts
-        
-    - name: Deploy to Server
-      run: |
-        rsync -avz --delete -e "ssh -i ~/.ssh/deploy_key" \
-          build/ developer@13.234.33.4:/var/www/html/schemefinder.arthnirmiti.com/
+    - name: Upload build artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: build-artifact
+        path: build.tar.gz
