@@ -2,6 +2,7 @@
 name: Deploy React Frontend
 
 on:
+  workflow_dispatch:  # Allows manual trigger
   push:
     branches: [ main ]
   pull_request:
@@ -10,9 +11,6 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    concurrency: 
-      group: production
-      cancel-in-progress: true
     
     steps:
     - uses: actions/checkout@v4
@@ -26,15 +24,7 @@ jobs:
     - name: Install dependencies
       run: |
         npm ci
-        npm install --save-dev canvas @babel/plugin-proposal-private-property-in-object
-        
-    - name: Create test setup
-      run: |
-        # Create mock directory
-        mkdir -p src/__mocks__
-        
-        # Create react-lottie mock
-        echo 'import React from "react"; const Lottie = () => <div data-testid="mock-lottie">Lottie Animation</div>; export default Lottie;' > src/__mocks__/react-lottie.js
+        npm install --save-dev @babel/plugin-proposal-private-property-in-object
         
     - name: Build
       run: npm run build
@@ -51,4 +41,4 @@ jobs:
     - name: Deploy to Server
       run: |
         rsync -avz --delete -e "ssh -i ~/.ssh/deploy_key" \
-          build/ developer@13.234.33.4:/var/www/html/schemefinder.arthnirmiti.com/ 
+          build/ developer@13.234.33.4:/var/www/html/schemefinder.arthnirmiti.com/
