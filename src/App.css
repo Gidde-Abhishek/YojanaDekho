@@ -1,0 +1,232 @@
+:root {
+  --primary-color: #3a4f7a;
+  --secondary-color: #2c3e50;
+  --accent-color: #3b5bdb;
+  --background-color: #f0f2f5;
+  --text-color: #333;
+  --text-light: #6b7280;
+  --white: #ffffff;
+  --success-color: #4ade80;
+  --warning-color: #fcc419;
+  --error-color: #e74c3c;
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+body {
+  font-family: 'Poppins', sans-serif;
+  line-height: 1.6;
+  color: var(--text-color);
+  background-color: var(--background-color);
+  margin: 0;
+  padding: 0;
+}
+
+.app {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.app-header {
+  background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+  color: var(--white);
+  padding: 2rem 1.5rem;
+  text-align: center;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  position: relative;
+  overflow: hidden;
+}
+
+.app-header::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0) 70%);
+  animation: ripple 15s infinite linear;
+  opacity: 0;
+}
+
+@keyframes ripple {
+  0% { transform: translate(0, 0); opacity: 1; }
+  100% { transform: translate(50%, 50%); opacity: 0; }
+}
+
+.app-header h1 {
+  margin: 0 0 1.5rem 0;
+  font-size: 2.5rem;
+  font-weight: 700;
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+}
+
+.app-nav {
+  margin-top: 1.5rem;
+}
+
+.nav-steps {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.nav-step {
+  color: rgba(255, 255, 255, 0.7);
+  padding: 0.6rem 1.2rem;
+  border-radius: 25px;
+  font-weight: 500;
+  font-size: 0.95rem;
+  background-color: rgba(255, 255, 255, 0.1);
+  position: relative;
+  display: flex;
+  align-items: center;
+  transition: all 0.3s ease;
+}
+
+.nav-step.active {
+  color: var(--white);
+  font-weight: 600;
+  background-color: rgba(255, 255, 255, 0.2);
+  transform: scale(1.05);
+}
+
+.home-link {
+  color: inherit;
+  text-decoration: none;
+}
+
+.check-icon {
+  margin-left: 0.5rem;
+  color: var(--success-color);
+}
+
+.step-divider {
+  width: 20px;
+  height: 2px;
+  background-color: rgba(255, 255, 255, 0.3);
+}
+
+.app-main {
+  flex-grow: 1;
+  background-color: var(--white);
+  padding: 2rem;
+  border-radius: 16px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  margin: 2rem auto;
+  max-width: 1200px;
+  width: 90%;
+}
+
+.loading {
+  text-align: center;
+  font-size: 1.2rem;
+  margin-top: 2rem;
+  color: var(--primary-color);
+}
+
+.error {
+  color: var(--error-color);
+  text-align: center;
+  font-size: 1.2rem;
+  margin-top: 2rem;
+  padding: 1rem;
+  background-color: #fde8e8;
+  border-radius: 8px;
+  border: 1px solid #f8b4b4;
+}
+
+button {
+  background-color: var(--accent-color);
+  color: var(--white);
+  font-weight: 600;
+  padding: 12px 24px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+  font-size: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+button:hover {
+  background-color: #364fc7;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+input[type="text"]:not(.search-bar-abhi-style),
+input[type="number"]:not(.search-bar-abhi-style),
+select:not(.search-bar-abhi-style) {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 1.5rem;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+}
+
+input[type="text"]:not(.search-bar-abhi-style):focus,
+input[type="number"]:not(.search-bar-abhi-style):focus,
+select:not(.search-bar-abhi-style):focus {
+  outline: none;
+  border-color: var(--accent-color);
+  box-shadow: 0 0 0 3px rgba(59, 91, 219, 0.1);
+}
+
+.app-footer {
+  text-align: center;
+  margin-top: auto;
+  padding: 1.5rem;
+  background-color: var(--secondary-color);
+  color: var(--white);
+  font-size: 0.9rem;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.fade-in {
+  animation: fadeIn 0.5s ease-out;
+}
+
+@media (max-width: 768px) {
+  .app-header {
+    padding: 1.5rem 1rem;
+  }
+
+  .app-header h1 {
+    font-size: 1.8rem;
+  }
+
+  .nav-steps {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .nav-step {
+    text-align: center;
+    justify-content: center;
+    margin-bottom: 0.5rem;
+  }
+
+  .step-divider {
+    display: none;
+  }
+
+  .app-main {
+    padding: 1.5rem;
+    width: 95%;
+  }
+
+  button {
+    width: 100%;
+  }
+}

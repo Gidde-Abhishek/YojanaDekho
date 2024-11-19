@@ -1,0 +1,203 @@
+.mobile-login-container {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #f5f7fa 0%, #e4e9f2 100%);
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.mobile-login-wrapper {
+  width: 100%;
+  max-width: 380px;
+  margin: 0 auto;
+  padding: 0 16px;
+  box-sizing: border-box;
+}
+
+.mobile-login-card {
+  background: white;
+  border-radius: 24px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+  padding: 32px 24px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.mobile-brand-header {
+  text-align: center;
+  margin-bottom: 32px;
+}
+
+.mobile-logo {
+  width: 60px;
+  height: 60px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border-radius: 16px;
+  color: white;
+  font-size: 24px;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 16px;
+}
+
+.mobile-login-subtitle {
+  color: #666;
+  font-size: 16px;
+  margin: 8px 0 24px;
+  text-align: center;
+}
+
+.mobile-input-group {
+  position: relative;
+  margin-bottom: 20px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  background: white;
+  border: 2px solid #e0e0e0;
+  border-radius: 12px;
+  padding: 12px 16px;
+  gap: 8px;
+  box-sizing: border-box;
+}
+
+.mobile-input-icon {
+  color: #666;
+  min-width: 20px;
+  flex-shrink: 0;
+}
+
+.mobile-country-code-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+.mobile-country-code {
+  color: #1a1a1a;
+  font-size: 16px;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.mobile-divider {
+  height: 24px;
+  width: 1px;
+  background-color: #e0e0e0;
+  flex-shrink: 0;
+}
+
+.mobile-login-input {
+  width: 100%;
+  border: none;
+  outline: none;
+  font-size: 16px;
+  padding: 0;
+  background: transparent;
+  min-width: 0;
+}
+
+.mobile-input-group:focus-within {
+  border-color: #667eea;
+  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+.error-container {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 16px;
+  padding: 8px 12px;
+  background-color: #fff5f5;
+  border-radius: 8px;
+}
+
+.error-icon {
+  color: #e53e3e;
+}
+
+.error {
+  color: #e53e3e;
+  font-size: 14px;
+  margin: 0;
+}
+
+.mobile-login-button {
+  width: 100%;
+  padding: 16px;
+  border: none;
+  border-radius: 12px;
+  background: #3498db;
+  color: white;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: all 0.3s ease;
+  margin-top: 24px;
+}
+
+.mobile-login-button:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.mobile-login-button:not(:disabled):hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.1);
+}
+
+.info-section {
+  text-align: center;
+  margin-top: 24px;
+}
+
+.info {
+  color: #666;
+  font-size: 16px;
+}
+
+.info-icon {
+  color: #667eea;
+  margin-right: 8px;
+}
+
+.button-icon {
+  width: 18px;
+  height: 18px;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.fade-in {
+  animation: fadeIn 0.5s ease-out;
+}
+
+@media (max-width: 480px) {
+  .mobile-login-wrapper {
+    padding: 0 12px;
+  }
+  
+  .mobile-login-card {
+    padding: 24px 16px;
+  }
+  
+  .mobile-input-group {
+    padding: 10px 12px;
+  }
+  
+  .mobile-login-input {
+    font-size: 14px;
+  }
+}
